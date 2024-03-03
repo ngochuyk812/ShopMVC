@@ -1,7 +1,102 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
+    Layout = "_Layout";
+    ViewBag.Title = "Home";
 }
+@section Styles{
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://theme.hstatic.net/1000087022/1000987773/14/slideShow_f1_1.png" class="d-block w-100 image-carouse" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="https://theme.hstatic.net/1000087022/1000987773/14/slideShow_f1_3.png" class="d-block w-100 image-carouse" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="https://theme.hstatic.net/1000087022/1000987773/14/slideShow_f1_2.png" class="d-block w-100 image-carouse" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 
-<h1>Home</h1>
+<div class="" style="background: #ecebea;">
+    <div class="policies container">
+        <p class="policies_text">
+            <span>
+                <svg class="policies_icon" viewBox="0 0 32 20" opacity="1">
+                    <path d="M29.7599 8.47869L28.9312 5.20365C29.1578 5.1561 29.3278 4.9575 29.3278 4.71957V4.19152C29.3278 3.04502 28.3837 2.11231 27.2234 2.11231H23.4489V1.02312C23.4489 0.458945 22.9844 0 22.4134 0H3.17326C2.60226 0 2.13775 0.458945 2.13775 1.02312V10.0001C2.13775 10.2735 2.36207 10.4952 2.63882 10.4952C2.91551 10.4952 3.13988 10.2735 3.13988 10.0001V1.02312C3.13988 1.0049 3.15482 0.990142 3.17326 0.990142H22.4134C22.4318 0.990142 22.4467 1.0049 22.4467 1.02312V10.0002C22.4467 10.2736 22.671 10.4953 22.9478 10.4953C23.2245 10.4953 23.4489 10.2737 23.4489 10.0002V9.43901H29.3594C29.3599 9.43901 29.3603 9.43913 29.3607 9.43913C29.3612 9.43913 29.3617 9.43907 29.3621 9.43907C30.0894 9.43956 30.707 9.91123 30.9191 10.5612H29.3611C29.0844 10.5612 28.8601 10.7828 28.8601 11.0562V12.1123C28.8601 12.9677 29.5643 13.6635 30.43 13.6635H30.9979V15.8417H29.6877C29.2574 14.6139 28.0761 13.7295 26.6889 13.7295C25.3017 13.7295 24.1203 14.6139 23.69 15.8417H23.4487V12.1123C23.4487 11.8389 23.2244 11.6172 22.9477 11.6172C22.671 11.6172 22.4466 11.8388 22.4466 12.1123V15.8416H12.0511C11.6207 14.6138 10.4394 13.7293 9.05221 13.7293C7.66502 13.7293 6.48364 14.6138 6.05332 15.8416H3.17326C3.15482 15.8416 3.13988 15.8268 3.13988 15.8086V14.7195H5.31107C5.58776 14.7195 5.81214 14.4978 5.81214 14.2244C5.81214 13.951 5.58782 13.7293 5.31107 13.7293H0.501064C0.224375 13.7293 0 13.951 0 14.2244C0 14.4978 0.224313 14.7195 0.501064 14.7195H2.13782V15.8086C2.13782 16.3728 2.60232 16.8317 3.17332 16.8317H5.87982C5.8797 16.8427 5.87895 16.8536 5.87895 16.8647C5.87895 18.5935 7.30252 20 9.05221 20C10.8019 20 12.2255 18.5935 12.2255 16.8647C12.2255 16.8536 12.2247 16.8427 12.2246 16.8317H23.5165C23.5164 16.8427 23.5156 16.8536 23.5156 16.8647C23.5156 18.5935 24.9392 20 26.6889 20C28.4386 20 29.8621 18.5935 29.8621 16.8647C29.8621 16.8536 29.8614 16.8427 29.8612 16.8317H31.4989C31.7756 16.8317 32 16.6101 32 16.3367V11.0561C32.0001 9.75241 31.0265 8.6692 29.7599 8.47869ZM23.4489 3.10239H27.2234C27.8312 3.10239 28.3257 3.59098 28.3257 4.19152V4.2245H23.4489V3.10239ZM23.4489 8.44893V5.21458H27.9011L28.7195 8.44893H23.4489ZM9.05221 19.01C7.85502 19.01 6.88101 18.0478 6.88101 16.8648C6.88101 15.6819 7.85502 14.7196 9.05221 14.7196C10.2494 14.7196 11.2234 15.6819 11.2234 16.8648C11.2234 18.0478 10.2494 19.01 9.05221 19.01ZM26.689 19.01C25.4918 19.01 24.5178 18.0478 24.5178 16.8648C24.5178 15.6819 25.4918 14.7196 26.689 14.7196C27.8862 14.7196 28.8602 15.6819 28.8602 16.8648C28.8602 18.0478 27.8862 19.01 26.689 19.01ZM30.998 12.6734H30.4301C30.117 12.6734 29.8622 12.4217 29.8622 12.1123V11.5512H30.9979L30.998 12.6734Z"
+                          fill="currentColor"></path>
+                    <path d="M9.05222 15.8418C8.48122 15.8418 8.01672 16.3007 8.01672 16.8649C8.01672 17.4291 8.48122 17.888 9.05222 17.888C9.62322 17.888 10.0877 17.4291 10.0877 16.8649C10.0877 16.3007 9.62322 15.8418 9.05222 15.8418Z"
+                          fill="currentColor"></path>
+                    <path d="M26.689 15.8418C26.118 15.8418 25.6535 16.3007 25.6535 16.8649C25.6535 17.4291 26.118 17.888 26.689 17.888C27.26 17.888 27.7245 17.4291 27.7245 16.8649C27.7245 16.3007 27.26 15.8418 26.689 15.8418Z"
+                          fill="currentColor"></path>
+                    <path d="M20.81 13.7297H13.3278C13.0511 13.7297 12.8267 13.9514 12.8267 14.2248C12.8267 14.4982 13.051 14.7199 13.3278 14.7199H20.81C21.0867 14.7199 21.3111 14.4982 21.3111 14.2248C21.3111 13.9514 21.0868 13.7297 20.81 13.7297Z"
+                          fill="currentColor"></path>
+                    <path d="M7.98333 11.6172H1.56994C1.29325 11.6172 1.06888 11.8388 1.06888 12.1123C1.06888 12.3857 1.29319 12.6073 1.56994 12.6073H7.98333C8.26002 12.6073 8.48439 12.3857 8.48439 12.1123C8.48439 11.8388 8.26002 11.6172 7.98333 11.6172Z"
+                          fill="currentColor"></path>
+                    <path d="M17.4233 4.89764C17.2276 4.70436 16.9103 4.70436 16.7147 4.8977L12.2589 9.30011L9.94099 7.00989C9.7453 6.81654 9.42805 6.81654 9.23242 7.00989C9.03673 7.20324 9.03673 7.51663 9.23242 7.70998L11.9047 10.3503C12.0025 10.447 12.1307 10.4953 12.2589 10.4953C12.3871 10.4953 12.5154 10.447 12.6132 10.3503L17.4232 5.59779C17.6189 5.40438 17.6189 5.09099 17.4233 4.89764Z"
+                          fill="currentColor"></path>
+                </svg>
+            </span><span>FREESHIP ĐƠN HÀNG &gt;500K</span>
+        </p>
+        <p class="policies_text">
+            <span>
+                <svg class="policies_icon" viewBox="0 0 18 20" opacity="1">
+                    <path fill="currentColor"
+                          d="M17.0148 3.23851L9.30179 0.0597217C9.10857 -0.0198877 8.89139 -0.0199268 8.69821 0.0597217L0.985248 3.23851C0.691486 3.35961 0.5 3.64429 0.5 3.96004V7.8243C0.5 13.1451 3.7398 17.9313 8.70258 19.9421C8.8932 20.0193 9.10676 20.0193 9.29742 19.9421C14.2601 17.9314 17.5 13.1452 17.5 7.8243V3.96004C17.5 3.64429 17.3086 3.35961 17.0148 3.23851ZM15.9259 7.8243C15.9259 12.3475 13.25 16.5115 9 18.3702C4.86357 16.5611 2.07407 12.4701 2.07407 7.8243V4.4816L9 1.62714L15.9259 4.4816V7.8243ZM8.13009 10.4577L11.5129 7.09973C11.8203 6.79465 12.3186 6.79461 12.626 7.09973C12.9333 7.40485 12.9333 7.89949 12.6259 8.20457L8.6866 12.1149C8.37919 12.4201 7.88087 12.42 7.57357 12.1149L5.37404 9.93157C5.06666 9.62645 5.06666 9.1318 5.37404 8.82672C5.68142 8.52164 6.17973 8.5216 6.48707 8.82672L8.13009 10.4577Z">
+                    </path>
+                </svg>
+            </span><span>BẢO HÀNH 10 NĂM</span>
+        </p>
+        <p class="policies_text">
+            <span>
+                <svg class="policies_icon" viewBox="0 0 20 20" opacity="1">
+                    <path fill="currentColor"
+                          d="M18.75 0H1.25C0.911458 0 0.611979 0.14881 0.351562 0.446429C0.117188 0.714286 0 1.04167 0 1.42857V4.28571H20V1.42857C20 1.04167 19.8698 0.714286 19.6094 0.446429C19.375 0.14881 19.0885 0 18.75 0ZM18.75 2.85714H1.25V1.42857H18.75V2.85714ZM1.25 18.5714C1.25 18.9583 1.36719 19.2857 1.60156 19.5536C1.86198 19.8512 2.16146 20 2.5 20H17.5C17.8385 20 18.125 19.8512 18.3594 19.5536C18.6198 19.2857 18.75 18.9583 18.75 18.5714V5.71429H1.25V18.5714ZM2.5 7.14286H17.5V18.5714H2.5V7.14286ZM13.125 8.57143H6.875C6.69271 8.57143 6.53646 8.64583 6.40625 8.79464C6.30208 8.91369 6.25 9.07738 6.25 9.28571C6.25 9.49405 6.30208 9.67262 6.40625 9.82143C6.53646 9.94048 6.69271 10 6.875 10H13.125C13.3073 10 13.4505 9.94048 13.5547 9.82143C13.6849 9.67262 13.75 9.49405 13.75 9.28571C13.75 9.07738 13.6849 8.91369 13.5547 8.79464C13.4505 8.64583 13.3073 8.57143 13.125 8.57143Z">
+                    </path>
+                </svg>
+            </span><span>ĐỔI TRẢ MIỄN PHÍ TRONG VÒNG 3 NGÀY</span>
+        </p>
+    </div>
+</div>
+
+<div class="best-sellers mt-4">
+    <h1 class="h1-title text-center">BEST SELLERS</h1>
+    <a href="/product" class="text-uppercase text-black d-flex justify-content-center align-items-center gap-1" style="font-weight:500; font-size:14px">Xem tất cả <img src="~/images/icon-right.svg" /></a>
+    
+    <div class="container-best-sellers">
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fh%2Fe%2Fherbert.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fb%2Ft%2Fbt.calm.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fw%2Fe%2Fweb_-_kashmir_mo_i_copy_2_.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fh%2Fe%2Fheinz_1.png&w=640&q=75")
+    </div>
+
+</div>
+
+<div class="best-sellers mt-4">
+    <h1 class="h1-title text-center">NEW PRODUCT</h1>
+    <a href="/product" class="text-uppercase text-black d-flex justify-content-center align-items-center gap-1" style="font-weight:500; font-size:14px">Xem tất cả <img src="~/images/icon-right.svg" /></a>
+
+    <div class="container-best-sellers">
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fb%2Fe%2Fbellini_2.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2F3%2F_%2F3_2.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fc%2Fh%2Fcharm.png&w=640&q=75")
+        @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", "https://curnonwatch.com/_next/image/?url=https%3A%2F%2Fshop.curnonwatch.com%2Fmedia%2Fcatalog%2Fproduct%2Fe%2Fm%2Femanuel.png&w=640&q=75")
+    </div>
+
+</div>
+
+<div class="story-home container">
+    <img src="~/images/logo_small.svg" alt="logo" class="story_logo">
+    <p class="story_text">Cuối năm 2016, 3 chàng trai đam mê Startup và Đồng hồ quyết định thành lập Curnon, nhưng ngay từ đầu, chúng tôi đã biết rằng: Curnon sinh ra với một sứ mệnh lớn lao hơn, không chỉ dừng lại là một thương hiệu đồng hồ. Chúng tôi muốn mang tới một nguồn cảm hứng, một sự thay đổi về tư duy, về suy nghĩ và chính những cái chúng tôi gọi là trải nghiệm cho người trẻ.</p>
+    <img class="story_image" alt="logo" src="~/images/story-image.png">
+</div>
