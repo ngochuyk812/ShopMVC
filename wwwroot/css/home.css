@@ -3,26 +3,7 @@
     object-fit:cover;
 }
 
-.policies {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    
-}
-.policies_icon {
-    height: 20px;
-}
-.policies p{
-    font-size: 12px;
-}
 
-.policies_text{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-
-}
 
 .container-best-sellers{
     margin-top:50px;
@@ -46,9 +27,10 @@
     letter-spacing: .02em;
     color: rgba(22, 26, 33, .6);
 }
-.story_logo{
-    width:37px;
-    margin-bottom:30px;
+.story_logo {
+    width: 37px;
+    margin-bottom: 30px;
+}
 }
 .story_image {
     width: 100%;

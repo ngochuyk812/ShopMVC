@@ -29,9 +29,14 @@ namespace ShopMVC.Repositories
             var rs = table.Where(filter).FirstOrDefault();
             return rs;
         }
-        public async Task<T> FindAsync(Expression<Func<T, bool>> filter)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IIncludableQueryable<T, object>> includeProperties = null)
         {
-            var rs = await table.Where(filter).FirstOrDefaultAsync();
+            var source = table.Where(filter).Take(1);
+            if (includeProperties != null)
+            {
+                source = includeProperties(source);
+            }
+            var rs = await source.FirstOrDefaultAsync();
             return rs;
         }
 
