@@ -9,6 +9,12 @@ namespace ShopMVC.Database.Model
         [Required]
         [MaxLength(300)]
         public string Title { get; set; }
+        [Required]
+        [MaxLength(300)]
+        public string SubTitle { get; set; }
+        [Required]
+        public double Price { get; set; }
+        public int? Discount { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]

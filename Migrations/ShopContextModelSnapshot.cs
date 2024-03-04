@@ -89,9 +89,6 @@ namespace ShopMVC.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -126,8 +123,19 @@ namespace ShopMVC.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("SubTitle")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -155,7 +163,7 @@ namespace ShopMVC.Migrations
             modelBuilder.Entity("ShopMVC.Database.Model.ImportProduct", b =>
                 {
                     b.HasOne("ShopMVC.Database.Model.Product", "Product")
-                        .WithMany()
+                        .WithMany("Imports")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -177,6 +185,8 @@ namespace ShopMVC.Migrations
             modelBuilder.Entity("ShopMVC.Database.Model.Product", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Imports");
                 });
 #pragma warning restore 612, 618
         }

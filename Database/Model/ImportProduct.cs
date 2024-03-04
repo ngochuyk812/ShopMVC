@@ -8,8 +8,6 @@ namespace ShopMVC.Database.Model
     {
         [Required]
         public int ProductId { get; set; }
-        [Required]
-        public double Price { get; set; }
         public string Color { get; set; }
         [Required]
         public int Quantity { get; set; }
