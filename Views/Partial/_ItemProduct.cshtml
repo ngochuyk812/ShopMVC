@@ -1,15 +1,20 @@
-﻿@using ShopMVC.Database.Model;
-@model string
+﻿@model Product
+@{
+    double discountAmount = Model.Price * ((double)(Model?.Discount ?? 0) / 100);
+    discountAmount = Model.Price - discountAmount;
+    CultureInfo culture = new CultureInfo("vi-VN");
+    NumberFormatInfo numberFormat = culture.NumberFormat;
 
+}
 <div class="card-product">
     <div class="image-product">
-        <img src="@Model" />
+        <img src="@Model.Images?.First()?.Src" />
         <button class="text-uppercase">Thêm giỏ hàng</button>
     </div>
-    <p class="sub-title-card">WEIMAR</p>
-    <p class="name-card">Calm</p>
+    <p class="sub-title-card">@Model.SubTitle</p>
+    <p class="name-card">@Model.Title</p>
     <div class="block-price">
-        <p class="pro-price">2.074.00 đ</p>
-        <p class="discount-price">2.074.00 đ</p>
+        <p class="pro-price">@discountAmount.ToString("C", numberFormat)</p>
+        <p class="discount-price">@Model.Price.ToString("C", numberFormat)</p>
     </div>
 </div>

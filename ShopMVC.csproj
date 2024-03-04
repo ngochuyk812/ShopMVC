@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
 
 </Project>
