@@ -8,11 +8,10 @@ namespace ShopMVC.Database.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [DefaultValue(1)]
-        public int Status { get; set; } 
+        public int Status { get; set; } = 1;
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
 
     }
