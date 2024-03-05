@@ -1,9 +1,4 @@
-﻿.image-carouse{
-    height:450px;
-    object-fit:cover;
-}
-
-
+﻿
 
 .container-best-sellers{
     margin-top:50px;
@@ -30,7 +25,6 @@
 .story_logo {
     width: 37px;
     margin-bottom: 30px;
-}
 }
 .story_image {
     width: 100%;

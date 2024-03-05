@@ -1,0 +1,33 @@
+﻿@model ProductViewModel
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "_Layout";
+    
+
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/product.css" asp-append-version="true" />
+}
+
+@Html.Partial("~/Views/Partial/_Carousel.cshtml")
+
+<div class="main-product container">
+    <h2 class="title-list-product">Danh sách sản phẩm</h2>
+    <div class="des-list-product">
+        <p>Sự tự tin trên cổ tay của mọi người</p>
+        <span>@Model?.Data?.Data?.Count() sản phẩm</span>
+    </div>
+
+    <div class="display-product">
+        @foreach (var tmp in Model?.Data?.Data)
+        {
+            @Html.Partial("~/Views/Partial/_ItemProduct.cshtml", tmp)
+        }
+    </div>
+
+    @Html.Partial("~/Views/Partial/_Pagination.cshtml")
+</div>
+
+@section Scripts{
+    <script src="~/js/product.js" asp-append-version="true"></script>
+}

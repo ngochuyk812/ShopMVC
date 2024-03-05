@@ -2,27 +2,31 @@
 using Microsoft.EntityFrameworkCore;
 using ShopMVC.Database.Model;
 using ShopMVC.Repositories.Interface;
+using ShopMVC.Services.Interface;
+using ShopMVC.ViewModel;
 
 namespace ShopMVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
-
-        public ProductController(UnitOfWork unitOfWork)
+        public readonly IProductServices productServices;
+        public ProductController(IProductServices productServices)
         {
-            this.unitOfWork = unitOfWork;
+            this.productServices = productServices;
         }
 
-        public IActionResult Index()
+  
+        public async Task<IActionResult> Index(ProductViewModel viewModel)
         {
-            return View();
+            var page = await productServices.PageProduct(viewModel);
+            viewModel.Data = page;
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Detail(int id)
         {
-            var product = await unitOfWork.Product.FindAsync(f => f.Id == id, f=>f.Include(f=>f.Images));
-            if(product == null)
+            var product = await productServices.GetProductById(id);
+            if (product == null)
             {
                 return NotFound();
             }

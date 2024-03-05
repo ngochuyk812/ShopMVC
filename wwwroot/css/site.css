@@ -211,6 +211,7 @@
 }
 a{
     text-decoration:none;
+    color:black;
 }
 p{
     margin:0;
@@ -327,3 +328,32 @@ body {
     gap: 10px;
 }
 /*Policies*/
+
+/*Carousel*/
+.image-carouse {
+    height: 450px;
+    object-fit: cover;
+}
+/*Carousel*/
+
+/*Pagination*/
+.pagination{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:30px;
+}
+.pagination li{
+   cursor:pointer;
+   font-weight:500;
+   padding: 5px;
+}
+.pagination li.active{
+    background-color:lightgray;
+   font-weight:600;
+
+}
+
+
+
+/*Pagination*/

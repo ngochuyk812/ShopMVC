@@ -1,17 +1,21 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShopMVC.Database.Model;
 using ShopMVC.Extentions;
 using ShopMVC.Repositories;
 using ShopMVC.Repositories.Interface;
+using ShopMVC.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
-services.AddDbContext(builder.Configuration.GetConnectionString("Default") ?? "");
+var Configuration = builder.Configuration;
+services.Configure<PaginationSetting>(Configuration.GetSection("Pagination"));
+
+services.AddDbContext(Configuration.GetConnectionString("Default") ?? "");
 services.AddControllersWithViews();
 services.AddTransient<UnitOfWork>();
 services.AddServices();
 var app = builder.Build();
-
 
 app.UseStaticFiles();
 app.UseRouting();

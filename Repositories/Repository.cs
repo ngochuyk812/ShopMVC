@@ -66,8 +66,7 @@ namespace ShopMVC.Repositories
 
             source = source.Skip((index-1) * size).Take(size);
             var data = await source.ToListAsync();
-            var count = data.Count();
-            var rs = new Pagination<T>(total, index, count, data);
+            var rs = new Pagination<T>(total, index, size, data);
             return rs;
         }
     }
