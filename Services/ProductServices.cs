@@ -41,9 +41,9 @@ namespace ShopMVC.Services
         public async Task<Pagination<Product>> PageProduct(ProductViewModel viewModel)
         {
             var rs = await unitOfWork.Product.PagiAsync(viewModel.Page, paginationSetting.PageSize,
-                f => f.Title.Contains(viewModel.Title)
-                    && (viewModel.MaxPrice == -1 || f.Price <= viewModel.MaxPrice)
-                    && f.Price >= viewModel.MinPrice
+                f => (string.IsNullOrEmpty(viewModel.Title) || f.Title.Contains(viewModel.Title))
+                    && (viewModel.MaxPrice == null || f.Price <= viewModel.MaxPrice)
+                    && (viewModel.MinPrice == null || f.Price >= viewModel.MinPrice)
                     && (viewModel.Category == -1 || f.CategoryId == viewModel.Category),
                 i => i.Include(f => f.Images));
 

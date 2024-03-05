@@ -62,7 +62,7 @@ namespace ShopMVC.Repositories
             {
                 source = orderBy(source);
             }
-            var total = table.Count();
+            var total = source.Count();
 
             source = source.Skip((index-1) * size).Take(size);
             var data = await source.ToListAsync();

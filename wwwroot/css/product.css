@@ -272,3 +272,47 @@
     display:grid;
     grid-template-columns: auto auto auto auto;
 }
+
+/*Filter*/
+.filter-product{
+    background-color:lightgray;
+}
+.filter-product form{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1px;
+}
+.filter-product .filter-item{
+    height:45px;
+}
+.filter-product .filter-item{
+    height:45px;
+    border:none;
+    outline:none;
+    color:#757575;
+
+}
+.filter-product .filter-item:focus{
+    border:none;
+    outline:none;
+
+}
+.filter-product button{
+    padding:10px 20px;
+    border:none;
+    flex:0.1;
+}
+
+.f-1{
+    flex:1;
+}
+.f-2 {
+    flex: 2;
+}
+@media only screen and (max-width: 430px) {
+    .filter-product button {
+        flex: 1;
+    }
+}
+.
+/*Filter*/

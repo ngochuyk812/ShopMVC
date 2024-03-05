@@ -7,10 +7,13 @@ namespace ShopMVC.Repositories.Interface
     {
         private ShopContext _context;
         public readonly IRepository<Product> Product;
+        public readonly IRepository<Category> Category;
+
 
         public UnitOfWork(ShopContext context) {
             _context = context;
             Product = new Repository<Product>(_context);
+            Category = new Repository<Category>(_context);
         }
     }
 }
