@@ -8,7 +8,7 @@
 }
 <a href="/product/detail?id=@Model.Id" class="card-product">
     <div class="image-product">
-        <img src="@Model.Images?.First()?.Src" />
+        <img src="~/@Model.Images?.First()?.Src" />
         <button class="text-uppercase">Thêm giỏ hàng</button>
     </div>
     <p class="sub-title-card">@Model.SubTitle</p>

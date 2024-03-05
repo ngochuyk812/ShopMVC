@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ShopMVC.Database.Model;
 using ShopMVC.Repositories.Interface;
 using ShopMVC.Services.Interface;
-using ShopMVC.ViewModel;
 
 namespace ShopMVC.Controllers
 {
@@ -11,6 +10,11 @@ namespace ShopMVC.Controllers
     {
         public readonly IProductServices productServices;
         public ProductController(IProductServices productServices)
+        {
+            this.productServices = productServices;
+        }
+
+        public IActionResult Index()
         {
             this.productServices = productServices;
         }
@@ -24,8 +28,8 @@ namespace ShopMVC.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            var product = await productServices.GetProductById(id); 
-            if(product == null)
+            var product = await productServices.GetProductById(id);
+            if (product == null)
             {
                 return NotFound();
             }

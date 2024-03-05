@@ -4,11 +4,11 @@ using ShopMVC.ViewModel;
 
 namespace ShopMVC.Services.Interface
 {
-    public interface IProductServices
-    {
-        Task<HomeViewModel> GetHomeViewModelAsync();
-        Task<Product> GetProductById(int id);
-        Task<Pagination<Product>> PageProduct(ProductViewModel viewModel);
+        public interface IProductServices
+        {
+                Task<HomeViewModel> GetHomeViewModelAsync();
+                Task<Product> GetProductById(int id);
+                Task<Pagination<Product>> PageProduct(ProductViewModel viewModel);
 
-    }
+        }
 }

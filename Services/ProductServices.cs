@@ -9,12 +9,13 @@ using ShopMVC.ViewModel;
 
 namespace ShopMVC.Services
 {
-    public class ProductServices: IProductServices
+    public class ProductServices : IProductServices
     {
         public PaginationSetting paginationSetting { get; set; }
         public UnitOfWork unitOfWork { get; set; }
 
-        public ProductServices(UnitOfWork unitOfWork, IOptions<PaginationSetting> options) { 
+        public ProductServices(UnitOfWork unitOfWork, IOptions<PaginationSetting> options)
+        {
             this.unitOfWork = unitOfWork;
             this.paginationSetting = options.Value;
         }
@@ -34,17 +35,17 @@ namespace ShopMVC.Services
         public async Task<Product> GetProductById(int id)
         {
             var product = await unitOfWork.Product.FindAsync(f => f.Id == id, f => f.Include(f => f.Images));
-            return product; 
+            return product;
         }
 
         public async Task<Pagination<Product>> PageProduct(ProductViewModel viewModel)
         {
             var rs = await unitOfWork.Product.PagiAsync(viewModel.Page, paginationSetting.PageSize,
-                f=>f.Title.Contains(viewModel.Title)
+                f => f.Title.Contains(viewModel.Title)
                     && (viewModel.MaxPrice == -1 || f.Price <= viewModel.MaxPrice)
                     && f.Price >= viewModel.MinPrice
                     && (viewModel.Category == -1 || f.CategoryId == viewModel.Category),
-                i=>i.Include(f=>f.Images));
+                i => i.Include(f => f.Images));
 
             return rs;
 

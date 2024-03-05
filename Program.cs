@@ -12,10 +12,9 @@ var Configuration = builder.Configuration;
 services.Configure<PaginationSetting>(Configuration.GetSection("Pagination"));
 
 services.AddDbContext(Configuration.GetConnectionString("Default") ?? "");
-services.AddControllersWithViews(); 
+services.AddControllersWithViews();
 services.AddTransient<UnitOfWork>();
 services.AddServices();
-
 var app = builder.Build();
 
 app.UseStaticFiles();
