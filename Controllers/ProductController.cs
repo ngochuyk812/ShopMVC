@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopMVC.Database.Model;
 using ShopMVC.Repositories.Interface;
 using ShopMVC.Services.Interface;
+using ShopMVC.ViewModel;
 
 namespace ShopMVC.Controllers
 {
@@ -14,11 +15,7 @@ namespace ShopMVC.Controllers
             this.productServices = productServices;
         }
 
-        public IActionResult Index()
-        {
-            this.productServices = productServices;
-        }
-
+  
         public async Task<IActionResult> Index(ProductViewModel viewModel)
         {
             var page = await productServices.PageProduct(viewModel);
