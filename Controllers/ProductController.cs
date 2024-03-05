@@ -1,17 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ShopMVC.Database.Model;
+using ShopMVC.Repositories.Interface;
+using ShopMVC.Services.Interface;
+using ShopMVC.ViewModel;
 
 namespace ShopMVC.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        public readonly IProductServices productServices;
+        public ProductController(IProductServices productServices)
         {
-            return View();
+            this.productServices = productServices;
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Index(ProductViewModel viewModel)
         {
-            return View();
+            var page = await productServices.PageProduct(viewModel);
+            viewModel.Data = page;
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var product = await productServices.GetProductById(id); 
+            if(product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
 
     }

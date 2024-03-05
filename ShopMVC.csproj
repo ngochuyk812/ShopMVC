@@ -7,8 +7,13 @@
     <RootNamespace>ShopMVC</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Shared\_Pagition.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
+    <None Include="Views\Partial\_Pagination.cshtml" />
     <None Include="Views\Shared\Header.cshtml" />
   </ItemGroup>
 

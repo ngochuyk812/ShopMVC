@@ -1,6 +1,175 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Product
 @{
+    ViewBag.Title = Model.Title;
+    Layout = "_Layout";
+
+    double discountAmount = Model.Price * ((double)(Model?.Discount ?? 0) / 100);
+    discountAmount = Model.Price - discountAmount;
+    CultureInfo culture = new CultureInfo("vi-VN");
+    NumberFormatInfo numberFormat = culture.NumberFormat;
+
 }
-detail
+@section Styles{
+    <link rel="stylesheet" href="~/css/product.css" asp-append-version="true" />
+}
+<div class="detail-product ">
+    <div class="main-detail container">
+        <div class="gallery">
+            <div class="list-image-detail">
+                @foreach (var (image, index) in Model.Images.Select((image, index) => (image, index)))
+                {
+                    @if(index == 0)
+                    {
+                        <img src="~/@image?.Src" class="item-image-detail active" alt="Image" />
+                    }
+                    else
+                    {
+                        <img src="~/@image?.Src" class="item-image-detail" alt="Image" />
+                    }
+                }
+               
+            </div>
+            <div class="main-gallery">
+                <img src="~/@Model.Images?.First()?.Src" class="image-detail-active" />
+            </div>
+        </div>
+        <div class="main-info-product">
+            <div class="info-product">
+                <h3 class="sub-title-detail">@Model.SubTitle</h3>
+                <h2 class="title-detail">@Model.Title</h2>
+                <p class="price-detail">
+                    <span class="price-buy">
+                        @discountAmount.ToString("C", numberFormat)
+                    </span>
+                    <span class="price-root">
+                        @Model.Price.ToString("C", numberFormat)
+                    </span>
+                    @* <span class="star-comment">
+                        <img src="~/images/icon-star.svg" />
+                    </span> *@
+                </p>
+                <p class="status-product">Tình trạng: <span>Còn hàng</span></p>
+                <hr />
+                <p class="discount-rate">GIẢM TỚI <span>@Model.Discount %</span> CHO PHỤ KIỆN ĐI KÈM</p>
+            </div>
+
+            <div class="action-product">
+                <button class="buy-now">Thanh toán ngay</button>
+                <button class="add-cart">Thêm vào giỏ</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    @Html.Partial("~/Views/Partial/_Policies.cshtml")
+    <br>
+    @* Tab Info *@
+    <div class="tab-des-info container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Thông tin sản phẩm</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="transport-tab" data-bs-toggle="tab" data-bs-target="#transport" type="button" role="tab" aria-controls="transport" aria-selected="false">Chính sách vận chuyển</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="guarantee-tab" data-bs-toggle="tab" data-bs-target="#guarantee" type="button" role="tab" aria-controls="guarantee" aria-selected="false">Đổi trả & Bảo hành</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pay-tab" data-bs-toggle="tab" data-bs-target="#pay" type="button" role="tab" aria-controls="pay" aria-selected="false">Hình thức thanh toán</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                @Html.Raw(Model.Description)
+            </div>
+            <div class="tab-pane fade" id="transport" role="tabpanel" aria-labelledby="transport-tab">
+                <div class="productInfo_innerContent" style="padding: 0px 0px 0px 16px;">
+                    <div class="productInfo_boxText">
+                        <p class="productInfo_textUl">Phí vận chuyển:</p>
+                        <div class="productInfo_contentLi">
+                            <p class="productInfo_textLi">- <strong>MIỄN PHÍ VẬN CHUYỂN</strong> với đơn hàng từ 500,000đ trở lên</p>
+                            <p class="productInfo_textLi">- <strong>30,000đ</strong> với đơn hàng có giá trị thấp hơn 500,000đ</p>
+                        </div>
+                    </div>
+                    <div class="productInfo_boxText">
+                        <p class="productInfo_textUl">Thời gian vận chuyển:</p>
+                        <div class="productInfo_contentLi">
+                            <p class="productInfo_textLi">- Nội thành Hà Nội: 1-2 ngày</p>
+                            <p class="productInfo_textLi">- Miền Trung: 3-5 ngày</p>
+                            <p class="productInfo_textLi">- Miền Nam: 5-7 ngày</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="guarantee" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="productInfo_innerContent" style="padding: 0px 0px 0px 16px;">
+                    <div class="productInfo_boxText">
+                        <p class="productInfo_textUl">Chính sách đổi trả:</p>
+                        <div class="productInfo_contentLi">
+                            <p class="productInfo_textLi">
+                                - <strong>1 ĐỔI 1</strong> trong vòng 3 ngày kể từ khi nhận hàng (kèm theo
+                                các điều kiện)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="productInfo_boxText">
+                        <p class="productInfo_textUl">Chính sách bảo hành:</p>
+                        <div class="productInfo_contentLi">
+                            <p class="productInfo_textLi">- <strong>BẢO HÀNH 10 NĂM</strong> đối với những lỗi từ nhà sản xuất</p>
+                            <p class="productInfo_textLi">
+                                - <strong>BẢO HÀNH MIỄN PHÍ (1 lần) trong 1 năm đầu tiên</strong> với những
+                                lỗi người dùng như: vỡ, nứt kính, hấp hơi nước, va đập mạnh, rơi linh kiện bên trong mặt đồng hồ...
+                            </p>
+                            <p class="productInfo_textLi">- <strong>THAY PIN MIỄN PHÍ TRỌN ĐỜI</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pay" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="productInfo_boxText">
+                    <p>Chấp nhận các hình thức thanh toán sau: </p>
+                    <p class="productInfo_text04">
+                        <strong>Trả tiền mặt khi nhận hàng, Ví điện tử Momo, Ví điện tử VNPay</strong>
+                    </p>
+                    <div class="productInfo_boxImg">
+                        <img src="~/images/cod.png" alt="cod" class="productInfo_imgIcon">
+                        <img src="~/images/momo.png" alt="momo" class="productInfo_imgIcon">
+                        <img src="~/images/vnpay.png" alt="vnpay" class="productInfo_imgIcon">
+                    </div>
+                    <p class="productInfo_text04"><strong>Hoặc chuyển khoản ngân hàng qua tài khoản</strong></p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @* Tab Info *@
+
+    <div class="review container">
+        <h1>REVIEWS CỦA KHÁCH HÀNG</h1>
+        <div class="list-review">
+            <div class="item-review">
+                <section class="reviews_reviewer">
+                    <div class="avatar_avatar">P</div>
+                    <div class="reviews_info">
+                        <p class="reviews_name">Phạm Dũng</p>
+                        <p class="reviews_verifyStatus">Đã xác thực</p>
+                    </div>
+                    <p class="reviews_verifyStatus">20-10-2024</p>
+                </section>
+                <p class="content-review">
+                    Mặt kính Sapphire khá ổn với mức giá, dùng 1 thời gian mà không xước sát gì, dùng bản dây da nâu khá trẻ trung và năng động
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="~/js/product.js" asp-append-version="true"></script>
+}

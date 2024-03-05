@@ -1,28 +1,4 @@
-﻿.image-carouse{
-    height:450px;
-    object-fit:cover;
-}
-
-.policies {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    
-}
-.policies_icon {
-    height: 20px;
-}
-.policies p{
-    font-size: 12px;
-}
-
-.policies_text{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-
-}
+﻿
 
 .container-best-sellers{
     margin-top:50px;

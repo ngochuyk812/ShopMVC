@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopMVC.Database;
+using ShopMVC.Services;
+using ShopMVC.Services.Interface;
 
 namespace ShopMVC.Extentions
 {
-    public static class AddDb
+    public static class ServicesExtention
     {
         public static IServiceCollection AddDbContext(this IServiceCollection services, string connectString)
         {
@@ -15,6 +17,12 @@ namespace ShopMVC.Extentions
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
+            return services;
+        }
+
+        public static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddTransient<IProductServices, ProductServices>();
             return services;
         }
     }

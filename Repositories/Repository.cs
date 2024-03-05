@@ -29,9 +29,14 @@ namespace ShopMVC.Repositories
             var rs = table.Where(filter).FirstOrDefault();
             return rs;
         }
-        public async Task<T> FindAsync(Expression<Func<T, bool>> filter)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IIncludableQueryable<T, object>> includeProperties = null)
         {
-            var rs = await table.Where(filter).FirstOrDefaultAsync();
+            var source = table.Where(filter).Take(1);
+            if (includeProperties != null)
+            {
+                source = includeProperties(source);
+            }
+            var rs = await source.FirstOrDefaultAsync();
             return rs;
         }
 
@@ -61,8 +66,7 @@ namespace ShopMVC.Repositories
 
             source = source.Skip((index-1) * size).Take(size);
             var data = await source.ToListAsync();
-            var count = data.Count();
-            var rs = new Pagination<T>(total, index, count, data);
+            var rs = new Pagination<T>(total, index, size, data);
             return rs;
         }
     }
