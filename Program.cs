@@ -9,7 +9,7 @@ var services = builder.Services;
 services.AddDbContext(builder.Configuration.GetConnectionString("Default") ?? "");
 services.AddControllersWithViews();
 services.AddTransient<UnitOfWork>();
-
+services.AddServices();
 var app = builder.Build();
 
 
