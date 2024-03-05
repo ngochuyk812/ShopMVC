@@ -343,12 +343,12 @@ body {
     justify-content:center;
     margin-top:30px;
 }
-.pagination li{
+.pagination a{
    cursor:pointer;
    font-weight:500;
    padding: 5px;
 }
-.pagination li.active{
+.pagination a.active{
     background-color:lightgray;
    font-weight:600;
 

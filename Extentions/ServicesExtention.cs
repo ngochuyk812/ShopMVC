@@ -23,6 +23,8 @@ namespace ShopMVC.Extentions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddTransient<IProductServices, ProductServices>();
+            services.AddTransient<ICategoryServices, CategoryServices>();
+
             return services;
         }
     }

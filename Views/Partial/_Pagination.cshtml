@@ -1,45 +1,54 @@
-﻿@{
+﻿
+@{
     var Data = Model?.Data;
+    var currentPage = Context.Request.Path;
+    var queryOld = Context.Request.Query;
+
+
+    var ProcessData = (dynamic input) =>
+    {
+        var query = new Dictionary<string, StringValues>(queryOld);
+        query["page"] = input.ToString();
+        return QueryHelpers.AddQueryString(currentPage, query);
+    };
+
 }
 <ul class="pagination">
-    
-    <li>
-        @if (Data?.PageIndex <=1)
-        {
-            <a><i class="fa-solid fa-angle-left"></i></a>
-        }
-        else
-        {
-            var next = Data?.PageIndex - 1;
-            <a asp-route-page="@next"><i class="fa-solid fa-angle-left"></i></a>
-        }
+    @if (Data?.PageIndex <= 1)
+    {
+        <a><i class="fa-solid fa-angle-left"></i></a>
+    }
+    else
+    {
+        int prev = Data?.PageIndex - 1;
+        <a href="@ProcessData(prev)"><i class="fa-solid fa-angle-left"></i></a>
+    }
 
-        
-    </li>
+
     @for (var i = 1; i <= (Model?.Data?.TotalPage ?? 1) ; i++)
     {
         @if(Model?.Data?.PageIndex == i)
         {
-            <li class="active pageNumberLink">
-                <a >@i</a>
-            </li>
+            <a class="active pageNumberLink">
+                @i
+            </a>
         }else{
-            <li class="pageNumberLink" >
-                <a asp-route-page="@i">@i</a>
-            </li>
+            
+            <a href="@ProcessData(i)" class="pageNumberLink">
+                @i
+            </a>
         }
     }
-    <li>
-        @if (Data?.PageIndex >= Data?.TotalPage)
-        {
-            <a><i class="fa-solid fa-angle-right"></i></a>
-        }
-        else
-        {
-            var next = Data?.PageIndex + 1;
-            <a asp-route-page="@next"><i class="fa-solid fa-angle-right"></i></a>
-        }
+    
+    @if (Data?.PageIndex >= Data?.TotalPage)
+    {
+        <a><i class="fa-solid fa-angle-right"></i></a>
+    }
+    else
+    {
+        int next = Data?.PageIndex + 1;
+        <a href="@ProcessData(next)"><i class="fa-solid fa-angle-right"></i></a>
+    }
 
-    </li>
 </ul>
 
