@@ -22,5 +22,15 @@ namespace ShopMVC.Repositories.Interface
             UserRole = new Repository<UserRole>(_context);
             Address = new Repository<Address>(_context);
         }
+
+        public void Commit()
+        {
+            _context.SaveChanges();
+
+        }
+        public async Task CommitAsync()
+        {
+           await _context.SaveChangesAsync();
+        }
     }
 }

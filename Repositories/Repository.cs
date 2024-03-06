@@ -24,6 +24,13 @@ namespace ShopMVC.Repositories
 
         public ShopContext DbContext => _context;
 
+        public T Create(T obj)
+        {
+            table.Add(obj);
+            return obj;
+        }
+
+
         public T Find(Expression<Func<T, bool>> filter)
         {
             var rs = table.Where(filter).FirstOrDefault();
@@ -68,6 +75,12 @@ namespace ShopMVC.Repositories
             var data = await source.ToListAsync();
             var rs = new Pagination<T>(total, index, size, data);
             return rs;
+        }
+
+        public T Update(T obj)
+        {
+            table.Update(obj);
+            return obj;
         }
     }
 }
