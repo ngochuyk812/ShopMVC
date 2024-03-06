@@ -157,6 +157,40 @@
     <div class="review container">
         <h1>REVIEWS CỦA KHÁCH HÀNG</h1>
         <div class="list-review">
+            @if (ViewBag?.Logged)
+            {
+                string First = "";
+                string name = ViewBag.Name as string;
+                if (!string.IsNullOrEmpty(name))
+                {
+                    char firstLetter = char.ToUpper(name[0]);
+                    First = firstLetter.ToString();
+                }
+
+                <div class="item-review">
+                    <section class="reviews_reviewer">
+                        <div class="avatar_avatar">@First</div>
+                        <div class="reviews_info">
+                            <p class="reviews_name">@ViewBag?.Name</p>
+                            <p class="reviews_verifyStatus">@ViewBag?.Email</p>
+                        </div>
+                    </section>
+                    <div style="margin-top: 10px;">
+                        <textarea rows="5" style="width:100%;"></textarea>
+                        <div class="bottom-reivew mt-2 d-flex justify-content-end">
+                            <button class="bt-review">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="item-review">
+                    <a asp-controller="Account" asp-action="Login" asp-route-RequestPath="/product/detail?id=@Model.Id">Đăng nhập để đánh giá</a>
+                </div>
+            }
+            
+
             <div class="item-review">
                 <section class="reviews_reviewer">
                     <div class="avatar_avatar">P</div>

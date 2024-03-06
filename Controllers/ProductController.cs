@@ -5,6 +5,7 @@ using ShopMVC.Database.Model;
 using ShopMVC.Repositories.Interface;
 using ShopMVC.Services.Interface;
 using ShopMVC.ViewModel;
+using System.Security.Claims;
 
 namespace ShopMVC.Controllers
 {
@@ -37,6 +38,14 @@ namespace ShopMVC.Controllers
             {
                 return NotFound();
             }
+            var currentUser = HttpContext.User;
+            
+            
+            string name = currentUser?.Identity?.Name;
+            string email = currentUser?.FindFirstValue(ClaimTypes.Email);
+            ViewBag.Name = name;
+            ViewBag.Email = email;
+            ViewBag.Logged = currentUser.Identity.IsAuthenticated;
             return View(product);
         }
 

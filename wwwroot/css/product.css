@@ -272,10 +272,22 @@
     display:grid;
     grid-template-columns: auto auto auto auto;
 }
-
+/*Review*/
+.bt-review {
+    padding: 3px 30px;
+    outline: none;
+    border: none;
+    background-color: #53c66e;
+    color:white;
+}
+.item-review a {
+    color: #53c66e;
+    font-weight:500;
+}
+/*Review*/
 /*Filter*/
-.filter-product{
-    background-color:lightgray;
+.filter-product {
+    background-color: lightgray;
 }
 .filter-product form{
     display:flex;
@@ -309,6 +321,7 @@
 .f-2 {
     flex: 2;
 }
+
 @media only screen and (max-width: 430px) {
     .filter-product button {
         flex: 1;
@@ -316,3 +329,4 @@
 }
 .
 /*Filter*/
+
