@@ -12,6 +12,9 @@ namespace ShopMVC.Repositories.Interface
         public readonly IRepository<Role> Role;
         public readonly IRepository<UserRole> UserRole;
         public readonly IRepository<Address> Address;
+        public readonly IRepository<Review> Review;
+        public readonly IRepository<MediaReview> MediaReview;
+
 
         public UnitOfWork(ShopContext context) {
             _context = context;
@@ -21,6 +24,9 @@ namespace ShopMVC.Repositories.Interface
             Role = new Repository<Role>(_context);
             UserRole = new Repository<UserRole>(_context);
             Address = new Repository<Address>(_context);
+            Review = new Repository<Review>(_context);
+            MediaReview = new Repository<MediaReview>(_context);
+
         }
 
         public void Commit()

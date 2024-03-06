@@ -35,7 +35,8 @@ namespace ShopMVC.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, check.Name),
-                new Claim(ClaimTypes.Email, model.Email)
+                new Claim(ClaimTypes.Email, model.Email),
+                new Claim("Id", check.Id + "")
             };
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, "cookie");

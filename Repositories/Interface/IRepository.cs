@@ -16,6 +16,8 @@ namespace ShopMVC.Repositories.Interface
                 Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IIncludableQueryable<T, object>> includeProperties = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
                 Task<Pagination<T>> PagiAsync(int index, int size, Expression<Func<T, bool>> filter, Func<IQueryable<T>, IIncludableQueryable<T, object>> includeProperties = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
                 T Create(T obj);
+                Task<T> AddAsync(T obj);
+                void AddRange(IEnumerable<T> list);
                 T Update(T obj);
 
 

@@ -266,8 +266,8 @@ body {
 }
 
 .card-product .image-product img {
-    height: 270px;
-    width: 270px;
+    max-height: 100%;
+    max-width: 100%;
 }
 .card-product .image-product{
     margin-bottom:50px;

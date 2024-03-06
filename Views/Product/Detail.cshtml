@@ -175,12 +175,19 @@
                             <p class="reviews_verifyStatus">@ViewBag?.Email</p>
                         </div>
                     </section>
-                    <div style="margin-top: 10px;">
-                        <textarea rows="5" style="width:100%;"></textarea>
-                        <div class="bottom-reivew mt-2 d-flex justify-content-end">
-                            <button class="bt-review">Gửi</button>
+                    <form id="create_review" enctype="multipart/form-data">
+                        <input name="IdProduct" value="@Model.Id" hidden/>
+                        <div style="margin-top: 10px;">
+                            <textarea rows="5" name="Content" style="width:100%;"></textarea>
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Đính kèm hình ảnh hoặc video</label>
+                                <input class="form-control" type="file" name="files" accept="image/*,video/*" id="formFile" multiple>
+                            </div>
+                            <div class="bottom-reivew mt-2 d-flex justify-content-end">
+                                <button type="submit" class="bt-review">Gửi</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             }
             else
@@ -191,29 +198,28 @@
             }
             
 
-            <div class="item-review">
-                <section class="reviews_reviewer">
-                    <div class="avatar_avatar">P</div>
-                    <div class="reviews_info">
-                        <p class="reviews_name">Phạm Dũng</p>
-                        <p class="reviews_verifyStatus">Đã xác thực</p>
-                    </div>
-                    <p class="reviews_verifyStatus">20-10-2024</p>
-                </section>
-                <p class="content-review">
-                    Mặt kính Sapphire khá ổn với mức giá, dùng 1 thời gian mà không xước sát gì, dùng bản dây da nâu khá
-                    trẻ trung và năng động
-                </p>
+            <div id="list-comment">
+                
             </div>
+
         </div>
     </div>
 
 </div>
 
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
 
 
 
 
 @section Scripts {
     <script src="~/js/product.js" asp-append-version="true"></script>
+    <script>
+        const idProduct = @Model.Id;
+    </script>
+    <script src="~/js/detail_product.js" asp-append-version="true">
+    </script>
 }
