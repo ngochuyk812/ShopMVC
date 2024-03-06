@@ -1,0 +1,67 @@
+﻿@model SignUpViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Đăng ký";
+
+}
+<style>
+    .form-group span{
+        font-size:12px;
+    }
+</style>
+<div class="login_background">
+    <div class="form_login">
+        <form asp-controller="Account" asp-action="SignUp" method="post" class="signin-form signin-check">
+            <div class="icon_main_login">
+                <a href="/">
+                    <img src="/images/logo.png" alt="" height="100">
+                </a>
+            </div>
+            <h3>Đăng nhập</h3>
+            @if (@ViewBag.Success != null)
+            {
+                <div style="font-size: 13px;" class="alert alert-primary" role="alert">
+                    @ViewBag.Success
+                </div>
+            }
+            @if (ViewBag.Error != null)
+            {
+                <div style="font-size: 13px;" class="alert alert-danger" role="alert">
+                    <p>@ViewBag.Error</p>
+                </div>
+            }
+            <div class="form-group mb-3">
+                <label class="label"  asp-for="Email"></label>
+                <input class="form-control" asp-for="Email" />
+                <span class="text-danger" asp-validation-for="Email"></span>
+
+            </div>
+            <div class="form-group mb-3">
+                <label class="label"  asp-for="Name"></label>
+                <input class="form-control" asp-for="Name" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label class="label"  asp-for="Password"></label>
+                <input class="form-control" asp-for="Password" />
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+             <div class="form-group mb-3">
+                <label class="label"  asp-for="RePassword"></label>
+                <input class="form-control" asp-for="RePassword" />
+                <span class="text-danger" asp-validation-for="RePassword"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit"
+                        class="form-control btn btn-primary rounded submit px-3">
+                    Đăng ký
+                </button>
+            </div>
+            <div class="form-group">
+                <a style="font-weight: 500;">Quên mật khẩu</a>
+                <p>Bạn đã có tài khoản? <a style="font-weight: 500;" asp-controller="Account" asp-action="Login">Đăng nhập</a></p>
+            </div>
+        </form>
+    </div>
+</div>

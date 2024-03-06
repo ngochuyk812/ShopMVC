@@ -10,7 +10,10 @@ namespace ShopMVC.Database
         public DbSet<ImageProduct> ImageProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ImportProduct> ImportProducts { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public ShopContext(DbContextOptions<ShopContext> options): base(options)
         {
         }
