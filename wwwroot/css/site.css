@@ -266,8 +266,8 @@ body {
 }
 
 .card-product .image-product img {
-    height: 270px;
-    width: 270px;
+    height: 100%;
+    width: 100%;
 }
 .card-product .image-product{
     margin-bottom:50px;
