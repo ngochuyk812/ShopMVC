@@ -14,6 +14,8 @@ namespace ShopMVC.Database
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<MediaReview> MediaReviews { get; set; }
         public ShopContext(DbContextOptions<ShopContext> options): base(options)
         {
         }
