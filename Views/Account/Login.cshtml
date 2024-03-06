@@ -1,24 +1,50 @@
 ﻿@model LoginViewModel
-<div class="container-fluid">
-    <div class="row">
-        @if (ViewBag.Error != null)
-        {
-            <p>@ViewBag.Error</p>
-        }
-        @if (TempData["Success"] != null)
-        {
-            <p>@TempData["Success"]</p>
-        }
-        <form asp-controller="Account" asp-action="Login" method="post" class="form">
-            <input type="hidden" name="requestpath" id="requestpath" value="@Model?.RequestPath" />
-            <div class="form-group">
-                <input class="form-control" type="text" name="email" value="@Model?.Email" id="email" />
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Đăng nhập";
+
+}
+<div class="login_background">
+    <div class="form_login">
+        <form asp-controller="Account" asp-action="Login" method="post" class="signin-form signin-check">
+            <div class="icon_main_login">
+                <a href="/">
+                    <img src="/images/logo.png" alt="" height="100">
+                </a>
+            </div>
+            <h3>Đăng nhập</h3>
+            @if (TempData["Success"] != null)
+            {
+                <div style="font-size: 13px;" class="alert alert-primary" role="alert">
+                    @TempData["Success"]
+                </div>
+            }
+            @if (ViewBag.Error != null)
+            {
+                <div style="font-size: 13px;" class="alert alert-danger" role="alert">
+                    <p>@ViewBag.Error</p>
+                </div>
+                
+            }
+            <div class="form-group mb-3">
+                <label class="label" for="name">Email</label>
+                <input type="text" name="email" value="@Model?.Email" class="form-control" placeholder="Email"
+                       required="">
+            </div>
+            <div class="form-group mb-3">
+                <label class="label" for="password">Password</label>
+                <input type="password" name="password" value="@Model?.Password" class="form-control" placeholder="Password" required="">
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="password" value="@Model?.Password" id="password" />
+                <button type="submit"
+                        class="form-control btn btn-primary rounded submit px-3">
+                    Đăng nhập
+                </button>
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" type="submit" value="Login" />
+                <a style="font-weight: 500;">Quên mật khẩu</a>
+                <p>Bạn chưa có tài khoản? <a style="font-weight: 500;" asp-controller="Account" asp-action="SignUp">Đăng ký</a></p>
             </div>
         </form>
-    </div
+    </div>
+</div>

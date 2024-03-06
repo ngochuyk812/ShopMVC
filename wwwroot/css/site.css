@@ -354,6 +354,35 @@ body {
 
 }
 
-
-
 /*Pagination*/
+
+/*Login*/
+.login_background {
+    background-image: url('/images/bg-login.webp');
+    height: calc(100vh - 56px);
+    display: flex;
+    justify-content: end;
+    background-size:cover;
+    background-position: bottom;
+}
+
+.form_login {
+    background-color: rgba(209, 208, 208, 0.685);
+    width: 400px;
+    padding: 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .form_login form {
+        flex: 1;
+    }
+
+.icon_main_login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+/*Login*/
