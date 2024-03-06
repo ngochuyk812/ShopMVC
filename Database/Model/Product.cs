@@ -19,6 +19,7 @@ namespace ShopMVC.Database.Model
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+        public virtual IEnumerable<Review> Reviews { get; set; }
         public virtual IEnumerable<ImageProduct> Images { get; set;}
         public virtual IEnumerable<ImportProduct> Imports { get; set; }
 

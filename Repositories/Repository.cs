@@ -24,6 +24,17 @@ namespace ShopMVC.Repositories
 
         public ShopContext DbContext => _context;
 
+        public async Task<T> AddAsync(T obj)
+        {
+            var rs = await table.AddAsync(obj);
+            return rs.Entity;
+        }
+
+        public void AddRange(IEnumerable<T> list)
+        {
+            table.AddRange(list);
+        }
+
         public T Create(T obj)
         {
             table.Add(obj);
@@ -82,5 +93,7 @@ namespace ShopMVC.Repositories
             table.Update(obj);
             return obj;
         }
+
+        
     }
 }
