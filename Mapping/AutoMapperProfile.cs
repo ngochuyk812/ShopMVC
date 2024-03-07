@@ -14,6 +14,12 @@ namespace ShopMVC.Mapping
             CreateMap<Review, ReviewDTO>().ReverseMap();
             CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<MediaReview, MediaReviewDTO>().ReverseMap();
+            CreateMap<CartDTO, Cart>().ReverseMap();
+            CreateMap<CartViewModel, Cart>().ReverseMap();
+            CreateMap<ProductDTO, Product>().ReverseMap();
+            CreateMap<ImportProduct, ImportProductDTO>().ReverseMap();
+            CreateMap<ImageProductDTO, ImageProduct>().ReverseMap();
+
         }
     }
 }
