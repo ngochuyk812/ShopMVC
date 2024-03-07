@@ -5,7 +5,7 @@ namespace ShopMVC.Helper
     public class FileHelper
     {
         private static string _uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-        private static long MaxSize = 3145728;
+        public static long MaxSize = 3145728;
         public static async Task<Media> Save(IFormFile file, string folder )
         {
             if(file.Length > MaxSize)
@@ -49,7 +49,7 @@ namespace ShopMVC.Helper
 
         public static bool IsVideo(IFormFile file)
         {
-            return file.ContentType.StartsWith("video");
+            return file.ContentType.StartsWith("video/mp4");
         }
     }
 }

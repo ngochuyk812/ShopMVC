@@ -16,3 +16,4 @@ list_item_image.forEach(tmp => {
 
     })
 })
+
