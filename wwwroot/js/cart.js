@@ -1,7 +1,75 @@
-﻿const closeCart = () => {
+﻿var dataCart = []
+const closeCart = () => {
     document.querySelector(".bg-cart").style.maxWidth = "0px";
 }
 const openCart = () => {
+    if (dataCart.length == 0)
+    getDataCart();
     document.querySelector(".bg-cart").style.maxWidth = "100%";
+
+}
+
+const getDataCart = () => {
+    $.ajax({
+        url: '/api/cart',
+        type: 'GET',
+        success: function (response) {
+            dataCart = response;
+            initData()
+        }
+    })
+}
+const initData = () => {
+    var elmListCart = document.querySelector(".list-cart");
+    elmListCart.innerHTML = ""
+    dataCart.map(tmp => {
+        renderCart(tmp)
+    })
+}
+
+const renderCart = (tmp) => {
+    var elmListCart = document.querySelector(".list-cart");
+    var discountAmount = tmp.product.price * (tmp.product.discount / 100);
+    discountAmount = tmp.product.price - discountAmount;
+    var formattedDiscountAmount = discountAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    var price = tmp.product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    let colorOptions = tmp.product.imports.map(color => {
+        return `<option value="${color.id}" style="color: ${color.color};">${color.color}</option>`;
+    }).join('');
+
+    let elm = `
+            <div class="item-cart">
+                <div class="left-cart">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    <img width="90px" src="${tmp.product.images[0]?.src}" />
+                </div>
+                <div class="center-cart">
+                    <div class="top-center-cart mb-1">
+                        <p class="name-product-cart">${tmp.product.title}</p>
+                        <div class="price-product-cart">
+                            <p class="pro-price">${price}</p>
+                            <p class="discount-price">${formattedDiscountAmount}</p>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="quantity-product">
+                            <i class="fa-solid fa-circle-minus"></i>
+                            <p class="display-quantity">Qty: <span>${tmp.quantity}</span></p>
+                            <i class="fa-solid fa-circle-plus"></i>
+                        </div>
+                        <select class="colorSelect" onchange="showSelectedColor(event)">
+                            ${colorOptions}
+                        </select>
+                        
+                    </div>
+                </div>
+            </div>
+        `
+    elmListCart.innerHTML += elm;
+}
+
+
+const showSelectedColor = (e) => {
+    const colorSelect = e.target;
 
 }

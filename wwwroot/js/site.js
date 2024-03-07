@@ -19,7 +19,26 @@
 const addToCart = (e, id) => {
     e.stopPropagation();
     /*toastr.success("Thêm sản phầm vào giỏ hàng "+id, "Thành công")*/
-    console.log("Add Cart" +id)
+    console.log("Add Cart" + id)
+    $.ajax({
+        url: '/api/review',
+        type: 'POST',
+        data: {
+            ImportId: id
+        },
+        contentType: "application/json",
+        success: function (response) {
+            addReview(response)
+            toastr.success('Đánh giá của bạn đã được lưu lại', 'Đánh giá!')
+
+            console.log('Review submitted successfully:', response);
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Đánh giá!')
+
+        }
+    });
+
 }
 
 const handleDetail = (id) => {

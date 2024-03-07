@@ -50,5 +50,12 @@ namespace ShopMVC.Services
             return rs;
 
         }
+
+        public async Task<ImportProduct> GetImportProduct(int id)
+        {
+            var product = await unitOfWork.ImportProduct.FindAsync(f => f.Id == id,
+                f => f.Include(f => f.Product));
+            return product;
+        }
     }
 }
