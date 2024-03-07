@@ -16,6 +16,7 @@ namespace ShopMVC.Database
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<MediaReview> MediaReviews { get; set; }
+        public DbSet<Cart> Carts { get; set; }
         public ShopContext(DbContextOptions<ShopContext> options): base(options)
         {
         }

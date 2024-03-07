@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ShopMVC.Mapping;
 using ShopMVC.Helper;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +31,12 @@ services.AddAuthentication("SecurityScheme")
     });
 
 services.AddDbContext(Configuration.GetConnectionString("Default") ?? "");
-services.AddControllersWithViews();
+services.AddControllersWithViews()
+.AddJsonOptions(options =>
+{
+
+});
+
 services.AddAutoMapper
 (typeof(AutoMapperProfile).Assembly);
 services.AddSingleton<MailHelper>();

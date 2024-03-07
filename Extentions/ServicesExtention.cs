@@ -26,6 +26,7 @@ namespace ShopMVC.Extentions
             services.AddTransient<ICategoryServices, CategoryServices>();
             services.AddTransient<IAccountServices, AccountServices>();
             services.AddTransient<IReviewServices, ReviewServices>();
+            services.AddTransient<ICartServices, CartServices>();
 
             return services;
         }

@@ -14,6 +14,8 @@ namespace ShopMVC.Repositories.Interface
         public readonly IRepository<Address> Address;
         public readonly IRepository<Review> Review;
         public readonly IRepository<MediaReview> MediaReview;
+        public readonly IRepository<ImportProduct> ImportProduct;
+        public readonly IRepository<Cart> Cart;
 
 
         public UnitOfWork(ShopContext context) {
@@ -26,7 +28,8 @@ namespace ShopMVC.Repositories.Interface
             Address = new Repository<Address>(_context);
             Review = new Repository<Review>(_context);
             MediaReview = new Repository<MediaReview>(_context);
-
+            ImportProduct = new Repository<ImportProduct>(_context);
+            Cart = new Repository<Cart>(_context);
         }
 
         public void Commit()

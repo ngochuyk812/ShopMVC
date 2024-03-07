@@ -15,3 +15,15 @@
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+
+
+
+const handleDetail = (id) => {
+    window.location.href = '/product/detail?id=' + id
+}
+
+const goToLogin = (e = null) => {
+    e?.stopPropagation();
+    var path = window.location.href.replace(window.location.origin, "")
+    window.location.href = "/Account/Login?RequestPath=" + path
+}
