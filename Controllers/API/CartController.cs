@@ -28,23 +28,23 @@ namespace ShopMVC.Controllers.API
 
         [Authorize]
         [HttpPost("")]
-        public async Task<ActionResult> AddCart(CartViewModel model)
+        public async Task<ActionResult> AddCart(int ImportId)
         {
-            var import = await productServices.GetImportProduct(model.ImportId);
+            var import = await productServices.GetImportProduct(ImportId);
             if (import == null)
                 return BadRequest(new
                 {
                     mess = "Sản phẩm không tồn tại"
                 });
             
-            if (import.Quantity < model.Quantity)
+            if (import.Quantity < 1)
                 return BadRequest(new
                 {
                     mess = "Số lượng sản phẩm trong kho không đủ"
                 });
             var currentUser = HttpContext.User;
             var idUser = currentUser.FindFirstValue("Id") ?? "15";
-            var rs = await cartServices.CreateCart(int.Parse(idUser), import.ProductId, model);
+            var rs = await cartServices.CreateCart(int.Parse(idUser), import.ProductId, ImportId);
             if(rs == null)
                 return BadRequest(new
                 {

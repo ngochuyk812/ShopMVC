@@ -7,7 +7,7 @@ namespace ShopMVC.Services.Interface
 {
         public interface ICartServices
         {
-        Task<CartDTO> CreateCart(int idUser, int idProduct, CartViewModel model);
+        Task<CartDTO> CreateCart(int idUser, int idProduct, int ImportId);
         Task<IEnumerable<CartDTO>> GetCartByUser(int id);
         }
 

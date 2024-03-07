@@ -36,14 +36,30 @@ namespace ShopMVC.Services
                 .Include(f => f.Product).ThenInclude(f => f.Images));
             return mapper.Map<IEnumerable<CartDTO>>(rs);
         }
-        public async Task<CartDTO> CreateCart(int idUser,int idProduct, CartViewModel model)
+        public async Task<CartDTO> CreateCart(int idUser,int idProduct, int ImportId)
         {
-            Cart cart = mapper.Map<Cart>(model);
+            Cart cart = new Cart
+            {
+                ImportId = ImportId,
+                Quantity = 1
+            };
             cart.UserId = idUser;
             cart.ProductId = idProduct;
-            var entity = await unitOfWork.Cart.AddAsync(cart);
-            await unitOfWork.CommitAsync();
-            var rs = await unitOfWork.Cart.FindAsync(f => f.Id == entity.Id,
+            var check = await unitOfWork.Cart.FindAsync(f=>f.ImportId == ImportId);
+            if (check != null)
+            {
+                check.Quantity++;
+                unitOfWork.Cart.Update(check);
+                unitOfWork.Commit();
+                cart.Id = check.Id;
+            }
+            else
+            {
+                var entity = await unitOfWork.Cart.AddAsync(cart);
+                await unitOfWork.CommitAsync();
+                cart.Id = entity.Id;
+            }
+            var rs = await unitOfWork.Cart.FindAsync(f => f.Id == cart.Id,
                 i=>i.Include(f=>f.Product).ThenInclude(f=>f.Imports)
                 .Include(f => f.Product).ThenInclude(f => f.Images));
             return mapper.Map<CartDTO>(rs);

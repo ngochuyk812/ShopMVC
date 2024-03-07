@@ -14,13 +14,13 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <a class="cart_icon" href="javascript:void(0)" onclick="openCart()">
-                    <i class="fa fa-shopping-cart"></i><span class="quantity_cart">0</span>
+                    <i class="fa fa-shopping-cart"></i>
                 </a>
             }
             else
             {
-                <a class="cart_icon" href="/Account/Login">
-                    <i class="fa fa-shopping-cart"></i><span class="quantity_cart">0</span>
+                <a class="cart_icon" href="javascript:void(0)" onclick="goToLogin()">
+                    <i class="fa fa-shopping-cart"></i>
                 </a>
             }
             

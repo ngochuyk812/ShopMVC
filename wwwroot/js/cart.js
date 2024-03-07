@@ -21,7 +21,7 @@ const getDataCart = () => {
 }
 const initData = () => {
     var elmListCart = document.querySelector(".list-cart");
-    elmListCart.innerHTML = ""
+    elmListCart.innerHTML = "";
     dataCart.map(tmp => {
         renderCart(tmp)
     })
@@ -71,5 +71,32 @@ const renderCart = (tmp) => {
 
 const showSelectedColor = (e) => {
     const colorSelect = e.target;
+
+}
+
+const addToCart = (e, id) => {
+    e.stopPropagation();
+    console.log("Add Cart" + id)
+    $.ajax({
+        url: '/api/cart?ImportId=' + id,
+        type: 'POST',
+        success: function (response) {
+            const index = dataCart.findIndex(f => f.id == response.id)
+            if (index != -1) {
+                dataCart[index] = response
+            } else {
+                dataCart = [response, ...dataCart]
+            }
+
+            initData()
+            toastr.success('Thêm sản phẩm vào giỏ hàng', 'Thành công!')
+            console.log('Review submitted successfully:', response);
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+
+        }
+    });
+
 
 }
