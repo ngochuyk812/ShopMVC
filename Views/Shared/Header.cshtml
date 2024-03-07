@@ -1,4 +1,6 @@
-﻿<link rel="stylesheet" href="~/css/header.css" />
+﻿
+
+<link rel="stylesheet" href="~/css/header.css" />
 
 <header class="header">
     <nav class="nav_main">
@@ -9,9 +11,20 @@
             <li><a class="" href="/contact">Liên hệ</a></li>
         </ul>
         <div class="navbar-user">
-            <a class="cart_icon" href="javascript:void(0)" onclick="openCart()">
-                <i class="fa fa-shopping-cart"></i><span class="quantity_cart">0</span>
-            </a><a href="/profile"><i class="fa fa-user"></i></a><a class="hide menu_mobile" href="#">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="cart_icon" href="javascript:void(0)" onclick="openCart()">
+                    <i class="fa fa-shopping-cart"></i><span class="quantity_cart">0</span>
+                </a>
+            }
+            else
+            {
+                <a class="cart_icon" href="/Account/Login">
+                    <i class="fa fa-shopping-cart"></i><span class="quantity_cart">0</span>
+                </a>
+            }
+            
+            <a href="/profile"><i class="fa fa-user"></i></a><a class="hide menu_mobile" href="#">
                 <i class="fa fa-bars"></i>
             </a>
         </div>
