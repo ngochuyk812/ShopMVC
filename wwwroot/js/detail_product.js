@@ -63,10 +63,12 @@ $('#create_review').submit(function (event) {
         contentType: false, 
         success: function (response) {
             addReview(response)
+            toastr.success('Đánh giá của bạn đã được lưu lại', 'Đánh giá!')
+
             console.log('Review submitted successfully:', response);
         },
         error: function (xhr, status, error) {
-            console.error('Failed to submit review:', status, error);
+            toastr.error(xhr.responseJSON.mess, 'Đánh giá!')
             
         }
     });

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShopMVC.Helper;
 using ShopMVC.Services.Interface;
 using ShopMVC.ViewModel;
 using System.Security.Claims;
@@ -26,7 +27,7 @@ namespace ShopMVC.Controllers.API
         {
             var currentUser = HttpContext.User;
             var idUser = currentUser.FindFirstValue("Id");
-            if(string.IsNullOrEmpty(model.Content) == null && model.Files?.Count() == 0)
+            if(string.IsNullOrEmpty(model.Content) && model.Files?.Count() == 0)
             {
                 return BadRequest(new
                 {
@@ -39,7 +40,30 @@ namespace ShopMVC.Controllers.API
                 {
                     mess = "Sản phẩm không tồn tại"
                 });
-            
+            if(model.Files.Count() > 3)
+            {
+                return BadRequest(new
+                {
+                    mess = "Chỉ được gửi tối đa 3 file"
+                });
+            }
+            foreach(var tmp in model.Files)
+            {
+                if(!FileHelper.IsVideo(tmp) && !FileHelper.IsImage(tmp))
+                {
+                    return BadRequest(new
+                    {
+                        mess = "Chỉ hổ trợ định dang là video hoặc hình"
+                    }) ;
+                }
+                if(tmp.Length > FileHelper.MaxSize)
+                {
+                    return BadRequest(new
+                    {
+                        mess = "Chỉ hổ trợ file nhỏ hơn 3MB"
+                    });
+                }
+            }
             var item = await reviewServices.CreateReview(int.Parse(idUser), model);
             return Ok(item);
         }
