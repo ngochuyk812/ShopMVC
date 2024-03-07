@@ -15,3 +15,13 @@
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+
+const addToCart = (e, id) => {
+    e.stopPropagation();
+    /*toastr.success("Thêm sản phầm vào giỏ hàng "+id, "Thành công")*/
+    console.log("Add Cart" +id)
+}
+
+const handleDetail = (id) => {
+    window.location.href = '/product/detail?id=' + id
+}

@@ -6,10 +6,10 @@
     NumberFormatInfo numberFormat = culture.NumberFormat;
 
 }
-<a href="/product/detail?id=@Model.Id" class="card-product">
+<a href="javascript:void(0)" class="card-product" onclick="handleDetail(@Model.Id)">
     <div class="image-product">
         <img src="~/@Model.Images?.First()?.Src" />
-        <button class="text-uppercase">Thêm giỏ hàng</button>
+        <button class="text-uppercase bt-add-cart" onclick="addToCart(event, @Model.Id)">Thêm giỏ hàng</button>
     </div>
     <p class="sub-title-card">@Model.SubTitle</p>
     <p class="name-card">@Model.Title</p>
