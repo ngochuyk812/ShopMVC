@@ -81,5 +81,15 @@ namespace ShopMVC.Services
             unitOfWork.Commit();
             return mapper.Map<CartDTO>(rs);
         }
+
+        public int Delete(int id)
+        {
+            var rs = unitOfWork.Cart.Find(f => f.Id == id);
+            if (rs == null) return -1;
+            unitOfWork.Cart.Delete(rs);
+            unitOfWork.Commit();
+            return rs.Id;
+
+        }
     }
 }

@@ -88,5 +88,22 @@ namespace ShopMVC.Controllers.API
                 CartId = rs.Id
             });
         }
+
+        [Authorize]
+        [HttpDelete("")]
+        public ActionResult Remove(int id)
+        {
+            var rs = cartServices.Delete(id);
+            if (rs == -1)
+                return BadRequest(new
+                {
+                    mess = "Đã xảy ra lỗi vui lòng thử lại"
+                });
+
+            return Ok(new
+            {
+                Id = rs
+            });
+        }
     }
 }

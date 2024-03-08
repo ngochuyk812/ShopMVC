@@ -11,7 +11,7 @@ namespace ShopMVC.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseModel
     {
-        public ShopContext _context ;
+        public ShopContext _context;
         public DbSet<T> table;
 
         public Repository(ShopContext context)
@@ -41,6 +41,10 @@ namespace ShopMVC.Repositories
             return obj;
         }
 
+        public void Delete(T obj)
+        {
+            table.Remove(obj);
+        }
 
         public T Find(Expression<Func<T, bool>> filter)
         {
@@ -82,7 +86,7 @@ namespace ShopMVC.Repositories
             }
             var total = source.Count();
 
-            source = source.Skip((index-1) * size).Take(size);
+            source = source.Skip((index - 1) * size).Take(size);
             var data = await source.ToListAsync();
             var rs = new Pagination<T>(total, index, size, data);
             return rs;
@@ -94,6 +98,6 @@ namespace ShopMVC.Repositories
             return obj;
         }
 
-        
+
     }
 }

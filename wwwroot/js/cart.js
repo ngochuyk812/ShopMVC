@@ -40,7 +40,7 @@ const renderCart = (tmp) => {
     let elm = `
             <div class="item-cart">
                 <div class="left-cart">
-                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i onclick="removeCart(${tmp.id})" class="fa-solid fa-circle-xmark"></i>
                     <img width="90px" src="/${tmp.product.images[0]?.src}" />
                 </div>
                 <div class="center-cart">
@@ -72,7 +72,6 @@ const renderCart = (tmp) => {
 const showSelectedColor = (e, CartId) => {
     const ImportId = e.target.value;
     const oldValue = e.target.getAttribute('data-previous-value');
-    console.log(oldValue);
     $.ajax({
             url: '/api/cart/color',
             type: 'PUT',
@@ -91,10 +90,22 @@ const showSelectedColor = (e, CartId) => {
         });
 
 }
-
+const removeCart = (id)=>{
+    $.ajax({
+        url: '/api/cart?id=' + id,
+        type: 'DELETE',
+        success: function (response) {
+            const index = dataCart.findIndex(f => f.id == id)
+            dataCart.splice(index ,1);
+            initData()
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+        }
+    });
+}
 const addToCart = (e, id) => {
     e.stopPropagation();
-    console.log("Add Cart" + id)
     $.ajax({
         url: '/api/cart?ImportId=' + id,
         type: 'POST',

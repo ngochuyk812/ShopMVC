@@ -11,6 +11,7 @@ namespace ShopMVC.Services.Interface
                 Task<IEnumerable<CartDTO>> GetCartByUser(int id);
                 Task<CartDTO> GetCartById(int id);
                 Task<CartDTO> ChangeColor(ChangeColorCart model);
+                int Delete(int id);
         }
 
 }
