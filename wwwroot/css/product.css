@@ -115,7 +115,9 @@
     gap:10px;
 
 }
-.action-product button{
+
+.action-product button,
+.action-product a{
     padding: 22px 0;
     border:none;
     text-transform: uppercase;

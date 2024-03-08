@@ -54,8 +54,8 @@
             </div>
 
             <div class="action-product">
-                <button class="buy-now">Thanh toán ngay</button>
-                <button class="add-cart">Thêm vào giỏ</button>
+                <button class="buy-now" onclick="addToCart(event, @Model?.Imports?.First()?.Id)">Thêm vào giỏ</button>
+                <a class="add-cart" href="/product">Xem sản phẩm khác</a>
             </div>
         </div>
     </div>
@@ -176,12 +176,13 @@
                         </div>
                     </section>
                     <form id="create_review" enctype="multipart/form-data">
-                        <input name="IdProduct" value="@Model.Id" hidden/>
+                        <input name="IdProduct" value="@Model.Id" hidden />
                         <div style="margin-top: 10px;">
                             <textarea rows="5" name="Content" style="width:100%;"></textarea>
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Đính kèm hình ảnh hoặc video</label>
-                                <input class="form-control" type="file" name="files" accept="image/*,video/*" id="formFile" multiple>
+                                <input class="form-control" type="file" name="files" accept="image/*,video/*" id="formFile"
+                                    multiple>
                             </div>
                             <div class="bottom-reivew mt-2 d-flex justify-content-end">
                                 <button type="submit" class="bt-review">Gửi</button>
@@ -193,13 +194,14 @@
             else
             {
                 <div class="item-review">
-                    <a asp-controller="Account" asp-action="Login" asp-route-RequestPath="/product/detail?id=@Model.Id">Đăng nhập để đánh giá</a>
+                    <a asp-controller="Account" asp-action="Login" asp-route-RequestPath="/product/detail?id=@Model.Id">Đăng
+                        nhập để đánh giá</a>
                 </div>
             }
-            
+
 
             <div id="list-comment">
-                
+
             </div>
 
         </div>
