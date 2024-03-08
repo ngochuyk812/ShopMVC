@@ -53,9 +53,9 @@ const renderCart = (tmp) => {
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="quantity-product">
-                            <i class="fa-solid fa-circle-minus"></i>
-                            <p class="display-quantity">Qty: <span>${tmp.quantity}</span></p>
-                            <i class="fa-solid fa-circle-plus"></i>
+                            <i onclick="handleQuantity(${tmp.id}, -1)" class="fa-solid fa-circle-minus"></i>
+                            <p class="display-quantity">Qty: <span class="q-${tmp.id}">${tmp.quantity}</span></p>
+                            <i onclick="handleQuantity(${tmp.id}, 1)" class="fa-solid fa-circle-plus"></i>
                         </div>
                         <select class="colorSelect" data-previous-value=${tmp.import.id} onchange="showSelectedColor(event, ${tmp.id})">
                             ${colorOptions}
@@ -89,6 +89,28 @@ const showSelectedColor = (e, CartId) => {
             }
         });
 
+}
+const handleQuantity = (CartId, step)=>{
+    const elm = document.querySelector(".q-"+CartId)?.textContent ?? "0";
+    const quantity = parseInt(elm)+step;
+    if(quantity <1){
+        return
+    }
+    $.ajax({
+        url: '/api/cart/quantity',
+        type: 'PUT',
+        data:JSON.stringify({
+            CartId,
+            quantity
+        }),
+        contentType:'application/json',
+        success: function (response) {
+            document.querySelector(".q-"+CartId).textContent = response.quantity
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+        }
+    });
 }
 const removeCart = (id)=>{
     $.ajax({

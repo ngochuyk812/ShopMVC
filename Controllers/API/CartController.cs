@@ -90,6 +90,43 @@ namespace ShopMVC.Controllers.API
         }
 
         [Authorize]
+        [HttpPut("quantity")]
+        public async Task<ActionResult> ChangeQuantity([FromBody] ChangeQuantityCart body)
+        {
+            var cart = await cartServices.GetCartById(body.CartId);
+            if (body.Quantity < 1)
+                return BadRequest(new
+                {
+                    mess = "Số lượng sản phẩm phải lớn hơn 0"
+                });
+            if (cart == null)
+                return BadRequest(new
+                {
+                    mess = "Không tồn tại"
+                });
+
+            var import = await productServices.GetImportProduct(cart.ImportId);
+            if (import == null)
+                return BadRequest(new
+                {
+                    mess = "Không tồn tại"
+                });
+
+            if (import.Quantity < body.Quantity)
+                return BadRequest(new
+                {
+                    mess = "Số lượng sản phẩm không đủ số lượng cho bạn"
+                });
+            var rs = await cartServices.ChangeQuantity(body);
+            if (rs == null)
+                return BadRequest(new
+                {
+                    mess = "Đã xảy ra lỗi vui lòng thử lại"
+                });
+            return Ok(body);
+        }
+
+        [Authorize]
         [HttpDelete("")]
         public ActionResult Remove(int id)
         {

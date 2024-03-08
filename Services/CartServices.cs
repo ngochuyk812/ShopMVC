@@ -91,5 +91,16 @@ namespace ShopMVC.Services
             return rs.Id;
 
         }
+
+        public async Task<CartDTO> ChangeQuantity(ChangeQuantityCart model)
+        {
+            var rs = await unitOfWork.Cart.FindAsync(f => f.Id == model.CartId);
+            if (rs == null)
+                return null;
+            rs.Quantity = model.Quantity;
+            unitOfWork.Cart.Update(rs);
+            unitOfWork.Commit();
+            return mapper.Map<CartDTO>(rs);
+        }
     }
 }
