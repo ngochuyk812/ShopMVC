@@ -7,8 +7,10 @@ namespace ShopMVC.Services.Interface
 {
         public interface ICartServices
         {
-        Task<CartDTO> CreateCart(int idUser, int idProduct, int ImportId);
-        Task<IEnumerable<CartDTO>> GetCartByUser(int id);
+                Task<CartDTO> CreateCart(int idUser, int idProduct, int ImportId);
+                Task<IEnumerable<CartDTO>> GetCartByUser(int id);
+                Task<CartDTO> GetCartById(int id);
+                Task<CartDTO> ChangeColor(ChangeColorCart model);
         }
 
 }

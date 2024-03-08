@@ -34,14 +34,14 @@ const renderCart = (tmp) => {
     var formattedDiscountAmount = discountAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     var price = tmp.product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     let colorOptions = tmp.product.imports.map(color => {
-        return `<option value="${color.id}" style="color: ${color.color};">${color.color}</option>`;
+        return `<option value="${color.id}" ${tmp.import.id ==  color.id ? "selected" : ""}  style="color: ${color.color};">${color.color}</option>`;
     }).join('');
 
     let elm = `
             <div class="item-cart">
                 <div class="left-cart">
                     <i class="fa-solid fa-circle-xmark"></i>
-                    <img width="90px" src="${tmp.product.images[0]?.src}" />
+                    <img width="90px" src="/${tmp.product.images[0]?.src}" />
                 </div>
                 <div class="center-cart">
                     <div class="top-center-cart mb-1">
@@ -57,7 +57,7 @@ const renderCart = (tmp) => {
                             <p class="display-quantity">Qty: <span>${tmp.quantity}</span></p>
                             <i class="fa-solid fa-circle-plus"></i>
                         </div>
-                        <select class="colorSelect" onchange="showSelectedColor(event)">
+                        <select class="colorSelect" data-previous-value=${tmp.import.id} onchange="showSelectedColor(event, ${tmp.id})">
                             ${colorOptions}
                         </select>
                         
@@ -69,8 +69,26 @@ const renderCart = (tmp) => {
 }
 
 
-const showSelectedColor = (e) => {
-    const colorSelect = e.target;
+const showSelectedColor = (e, CartId) => {
+    const ImportId = e.target.value;
+    const oldValue = e.target.getAttribute('data-previous-value');
+    console.log(oldValue);
+    $.ajax({
+            url: '/api/cart/color',
+            type: 'PUT',
+            data:JSON.stringify({
+                CartId,
+                ImportId
+            }),
+            contentType:'application/json',
+            success: function (response) {
+                e.target.setAttribute('data-previous-value', ImportId);
+            },
+            error: function (xhr, status, error) {
+                toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+                e.target.value = oldValue;
+            }
+        });
 
 }
 
@@ -98,5 +116,12 @@ const addToCart = (e, id) => {
         }
     });
 
+
+}
+
+const channgeColor = (e, CartId) => {
+    e.stopPropagation();
+    console.log("Change Color Cart" + id)
+    
 
 }

@@ -36,7 +36,7 @@ namespace ShopMVC.Services
                 .Include(f => f.Product).ThenInclude(f => f.Images));
             return mapper.Map<IEnumerable<CartDTO>>(rs);
         }
-        public async Task<CartDTO> CreateCart(int idUser,int idProduct, int ImportId)
+        public async Task<CartDTO> CreateCart(int idUser, int idProduct, int ImportId)
         {
             Cart cart = new Cart
             {
@@ -45,7 +45,7 @@ namespace ShopMVC.Services
             };
             cart.UserId = idUser;
             cart.ProductId = idProduct;
-            var check = await unitOfWork.Cart.FindAsync(f=>f.ImportId == ImportId);
+            var check = await unitOfWork.Cart.FindAsync(f => f.ImportId == ImportId);
             if (check != null)
             {
                 check.Quantity++;
@@ -60,9 +60,26 @@ namespace ShopMVC.Services
                 cart.Id = entity.Id;
             }
             var rs = await unitOfWork.Cart.FindAsync(f => f.Id == cart.Id,
-                i=>i.Include(f=>f.Product).ThenInclude(f=>f.Imports)
+                i => i.Include(f => f.Product).ThenInclude(f => f.Imports)
                 .Include(f => f.Product).ThenInclude(f => f.Images));
             return mapper.Map<CartDTO>(rs);
         }
-    }   
+
+        public async Task<CartDTO> GetCartById(int id)
+        {
+            var rs = await unitOfWork.Cart.FindAsync(f => f.Id == id);
+            return mapper.Map<CartDTO>(rs);
+        }
+
+        public async Task<CartDTO> ChangeColor(ChangeColorCart model)
+        {
+            var rs = await unitOfWork.Cart.FindAsync(f => f.Id == model.CartId);
+            if (rs == null)
+                return null;
+            rs.ImportId = model.ImportId;
+            unitOfWork.Cart.Update(rs);
+            unitOfWork.Commit();
+            return mapper.Map<CartDTO>(rs);
+        }
+    }
 }
