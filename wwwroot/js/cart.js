@@ -34,14 +34,14 @@ const renderCart = (tmp) => {
     var formattedDiscountAmount = discountAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     var price = tmp.product.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     let colorOptions = tmp.product.imports.map(color => {
-        return `<option value="${color.id}" style="color: ${color.color};">${color.color}</option>`;
+        return `<option value="${color.id}" ${tmp.import.id ==  color.id ? "selected" : ""}  style="color: ${color.color};">${color.color}</option>`;
     }).join('');
 
     let elm = `
             <div class="item-cart">
                 <div class="left-cart">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                    <img width="90px" src="${tmp.product.images[0]?.src}" />
+                    <i onclick="removeCart(${tmp.id})" class="fa-solid fa-circle-xmark"></i>
+                    <img width="90px" src="/${tmp.product.images[0]?.src}" />
                 </div>
                 <div class="center-cart">
                     <div class="top-center-cart mb-1">
@@ -53,11 +53,11 @@ const renderCart = (tmp) => {
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="quantity-product">
-                            <i class="fa-solid fa-circle-minus"></i>
-                            <p class="display-quantity">Qty: <span>${tmp.quantity}</span></p>
-                            <i class="fa-solid fa-circle-plus"></i>
+                            <i onclick="handleQuantity(${tmp.id}, -1)" class="fa-solid fa-circle-minus"></i>
+                            <p class="display-quantity">Qty: <span class="q-${tmp.id}">${tmp.quantity}</span></p>
+                            <i onclick="handleQuantity(${tmp.id}, 1)" class="fa-solid fa-circle-plus"></i>
                         </div>
-                        <select class="colorSelect" onchange="showSelectedColor(event)">
+                        <select class="colorSelect" data-previous-value=${tmp.import.id} onchange="showSelectedColor(event, ${tmp.id})">
                             ${colorOptions}
                         </select>
                         
@@ -69,14 +69,65 @@ const renderCart = (tmp) => {
 }
 
 
-const showSelectedColor = (e) => {
-    const colorSelect = e.target;
+const showSelectedColor = (e, CartId) => {
+    const ImportId = e.target.value;
+    const oldValue = e.target.getAttribute('data-previous-value');
+    $.ajax({
+            url: '/api/cart/color',
+            type: 'PUT',
+            data:JSON.stringify({
+                CartId,
+                ImportId
+            }),
+            contentType:'application/json',
+            success: function (response) {
+                e.target.setAttribute('data-previous-value', ImportId);
+            },
+            error: function (xhr, status, error) {
+                toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+                e.target.value = oldValue;
+            }
+        });
 
 }
-
+const handleQuantity = (CartId, step)=>{
+    const elm = document.querySelector(".q-"+CartId)?.textContent ?? "0";
+    const quantity = parseInt(elm)+step;
+    if(quantity <1){
+        return
+    }
+    $.ajax({
+        url: '/api/cart/quantity',
+        type: 'PUT',
+        data:JSON.stringify({
+            CartId,
+            quantity
+        }),
+        contentType:'application/json',
+        success: function (response) {
+            document.querySelector(".q-"+CartId).textContent = response.quantity
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+        }
+    });
+}
+const removeCart = (id)=>{
+    $.ajax({
+        url: '/api/cart?id=' + id,
+        type: 'DELETE',
+        success: function (response) {
+            const index = dataCart.findIndex(f => f.id == id)
+            dataCart.splice(index ,1);
+            initData()
+        },
+        error: function (xhr, status, error) {
+            toastr.error(xhr.responseJSON.mess, 'Thất bại!')
+        }
+    });
+}
 const addToCart = (e, id) => {
     e.stopPropagation();
-    console.log("Add Cart" + id)
     $.ajax({
         url: '/api/cart?ImportId=' + id,
         type: 'POST',
@@ -98,5 +149,12 @@ const addToCart = (e, id) => {
         }
     });
 
+
+}
+
+const channgeColor = (e, CartId) => {
+    e.stopPropagation();
+    console.log("Change Color Cart" + id)
+    
 
 }

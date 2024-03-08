@@ -22,7 +22,7 @@ namespace ShopMVC.Services
 
         public async Task<HomeViewModel> GetHomeViewModelAsync()
         {
-            var clock = await unitOfWork.Product.PagiAsync(1, 4, f => f.Category.Name.Contains("Đồng hồ"), f => f.Include(f => f.Images).Include(f=>f.Imports), o => o.OrderByDescending(f => f.CreatedDate));
+            var clock = await unitOfWork.Product.PagiAsync(1, 4, f => f.Category.Name.Contains("Đồng hồ"), f => f.Include(f => f.Images).Include(f => f.Imports), o => o.OrderByDescending(f => f.CreatedDate));
             var jewelry = await unitOfWork.Product.PagiAsync(1, 4, f => f.Category.Name.Contains("Phụ kiện"), f => f.Include(f => f.Images).Include(f => f.Imports), o => o.OrderByDescending(f => f.CreatedDate));
             var model = new HomeViewModel
             {
@@ -34,7 +34,7 @@ namespace ShopMVC.Services
 
         public async Task<Product> GetProductById(int id)
         {
-            var product = await unitOfWork.Product.FindAsync(f => f.Id == id, f => f.Include(f => f.Images));
+            var product = await unitOfWork.Product.FindAsync(f => f.Id == id, f => f.Include(f => f.Images).Include(f => f.Imports));
             return product;
         }
 
@@ -45,7 +45,7 @@ namespace ShopMVC.Services
                     && (viewModel.MaxPrice == null || f.Price <= viewModel.MaxPrice)
                     && (viewModel.MinPrice == null || f.Price >= viewModel.MinPrice)
                     && (viewModel.Category == -1 || f.CategoryId == viewModel.Category),
-                i => i.Include(f => f.Images).Include(f=>f.Imports));
+                i => i.Include(f => f.Images).Include(f => f.Imports));
 
             return rs;
 

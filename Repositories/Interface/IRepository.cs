@@ -19,7 +19,7 @@ namespace ShopMVC.Repositories.Interface
                 Task<T> AddAsync(T obj);
                 void AddRange(IEnumerable<T> list);
                 T Update(T obj);
+                void Delete(T obj);
 
-
-    }
+        }
 }
